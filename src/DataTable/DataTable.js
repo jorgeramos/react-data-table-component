@@ -6,6 +6,7 @@ import Table from './Table';
 import TableHead from './TableHead';
 import TableHeadRow from './TableHeadRow';
 import TableRow from './TableRow';
+import FooterRow from './FooterRow';
 import TableCol from './TableCol';
 import TableColCheckbox from './TableColCheckbox';
 import TableHeader from './TableHeader';
@@ -20,7 +21,7 @@ import NoData from './NoDataWrapper';
 import NativePagination from './Pagination';
 import useDidUpdateEffect from './useDidUpdateEffect';
 import { propTypes, defaultProps } from './propTypes';
-import { isEmpty, sort, decorateColumns, getSortDirection, getNumberOfPages, recalculatePage, isRowSelected } from './util';
+import { isEmpty, sort, decorateColumns, getSortDirection, getNumberOfPages, recalculatePage, isRowSelected, noop } from './util';
 import { createStyles } from './styles';
 
 const DataTable = memo(({
@@ -100,6 +101,7 @@ const DataTable = memo(({
   conditionalRowStyles,
   theme,
   customStyles,
+  showFooter,
 }) => {
   const initialState = {
     allSelected: false,
@@ -196,6 +198,27 @@ const DataTable = memo(({
 
     return sortedData;
   }, [currentPage, pagination, paginationServer, rowsPerPage, sortedData]);
+
+  const footerRow = useMemo(() => {
+    let output = {
+      selectableDisabled: true
+    };
+    let footerColumns = columns
+      .filter(c => ['sum'].indexOf(c.footer) >= 0);
+    footerColumns.forEach(c => {
+        output[c.selector] = 0;
+      });
+    calculatedRows.forEach(r => {
+      footerColumns.forEach(c => {
+        let field = c.selector;
+        let value = Number(r[field]);
+        if (!isNaN(value)) {
+          output[field] += value;
+        }
+      });
+    });
+    return output;
+  });
 
   // recalculate the pagination and currentPage if the data length changes
   if (pagination && !paginationServer && data.length > 0 && calculatedRows.length === 0) {
@@ -381,6 +404,35 @@ const DataTable = memo(({
                       />
                     );
                   })}
+                  {!progressPending && showFooter && calculatedRows.length > 0 && (
+                    <FooterRow
+                      className={'rdt_TableFootRow'}
+                      id={'footer'}
+                      key={'footer'}
+                      keyField={keyField}
+                      row={footerRow}
+                      columns={columnsMemo}
+                      selectableRows={selectableRows}
+                      expandableRows={expandableRows}
+                      striped={striped}
+                      highlightOnHover={highlightOnHover}
+                      pointerOnHover={pointerOnHover}
+                      dense={dense}
+                      expandOnRowClicked={expandOnRowClicked}
+                      expandOnRowDoubleClicked={expandOnRowDoubleClicked}
+                      expandableRowsComponent={expandableRowsComponentMemo}
+                      expandableRowsHideExpander={expandableRowsHideExpander}
+                      onRowExpandToggled={onRowExpandToggled}
+                      defaultExpanderDisabled={true}
+                      defaultExpanded={false}
+                      inheritConditionalStyles={expandableInheritConditionalStyles}
+                      onRowClicked={noop}
+                      onRowDoubleClicked={noop}
+                      conditionalRowStyles={conditionalRowStyles}
+                      selected={false}
+                      selectableRowsHighlight={selectableRowsHighlight}
+                    />
+                  )}
                 </TableBody>
               )}
             </Table>
