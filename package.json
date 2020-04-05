@@ -18,12 +18,14 @@
     "react-data-table",
     "react-data-table-component"
   ],
-  "repository": "https://github.com/jorgeramos/react-data-table-component",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jorgeramos/react-data-table-component.git"
+  },
   "author": "jbetancur",
   "license": "MIT",
   "scripts": {
     "prepublishOnly": "npm run build",
-    "install": "npm run build",
     "build:dev": "rollup -c rollup/rollup.config.dev.js -m",
     "build:umd": "rollup -c rollup/rollup.config.umd.js",
     "build:cjs": "rollup -c rollup/rollup.config.cjs.js",
@@ -122,5 +124,9 @@
   },
   "publishConfig": {
     "access": "public"
-  }
+  },
+  "bugs": {
+    "url": "https://github.com/jorgeramos/react-data-table-component/issues"
+  },
+  "homepage": "https://github.com/jorgeramos/react-data-table-component#readme"
 }
