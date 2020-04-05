@@ -6,7 +6,6 @@ import Table from './Table';
 import TableHead from './TableHead';
 import TableHeadRow from './TableHeadRow';
 import TableRow from './TableRow';
-import FooterRow from './FooterRow';
 import TableCol from './TableCol';
 import TableColCheckbox from './TableColCheckbox';
 import TableHeader from './TableHeader';
@@ -403,8 +402,7 @@ const DataTable = memo(({
                     );
                   })}
                   {!progressPending && showFooter && calculatedRows.length > 0 && (
-                    <FooterRow
-                      className="rdt_TableFootRow"
+                    <TableRow
                       id="footer"
                       key="footer"
                       keyField={keyField}
