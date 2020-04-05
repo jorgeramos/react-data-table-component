@@ -20,7 +20,7 @@ import NoData from './NoDataWrapper';
 import NativePagination from './Pagination';
 import useDidUpdateEffect from './useDidUpdateEffect';
 import { propTypes, defaultProps } from './propTypes';
-import { isEmpty, sort, decorateColumns, getSortDirection, getNumberOfPages, recalculatePage, isRowSelected, noop } from './util';
+import { isEmpty, sort, decorateColumns, getSortDirection, getNumberOfPages, recalculatePage, isRowSelected } from './util';
 import { createStyles } from './styles';
 
 const DataTable = memo(({
@@ -422,8 +422,8 @@ const DataTable = memo(({
                       defaultExpanderDisabled
                       defaultExpanded={false}
                       inheritConditionalStyles={expandableInheritConditionalStyles}
-                      onRowClicked={noop}
-                      onRowDoubleClicked={noop}
+                      onRowClicked={() => null}
+                      onRowDoubleClicked={() => null}
                       conditionalRowStyles={conditionalRowStyles}
                       selected={false}
                       selectableRowsHighlight={selectableRowsHighlight}

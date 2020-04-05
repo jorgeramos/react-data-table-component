@@ -157,6 +157,7 @@ export const propTypes = {
   ),
   theme: PropTypes.string,
   customStyles: PropTypes.object,
+  showFooter: PropTypes.bool,
 };
 
 export const defaultProps = {

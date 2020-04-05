@@ -91,6 +91,7 @@ export interface IDataTableProps<T> {
   customStyles?: IDataTableStyles;
   theme?: string;
   conditionalRowStyles?: IDataTableConditionalRowStyles<T>[];
+  showFooter?: boolean;
 }
 
 export interface IDataTableColumn<T> {
