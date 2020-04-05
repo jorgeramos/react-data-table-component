@@ -93,6 +93,7 @@
     "moment": "^2.24.0",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
+    "release-it": "^13.5.1",
     "rimraf": "^3.0.2",
     "rollup": "^2.0.6",
     "rollup-plugin-babel": "^4.4.0",
