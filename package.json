@@ -23,6 +23,7 @@
   "license": "MIT",
   "scripts": {
     "prepublishOnly": "npm run build",
+    "install": "npm run build",
     "build:dev": "rollup -c rollup/rollup.config.dev.js -m",
     "build:umd": "rollup -c rollup/rollup.config.umd.js",
     "build:cjs": "rollup -c rollup/rollup.config.cjs.js",
