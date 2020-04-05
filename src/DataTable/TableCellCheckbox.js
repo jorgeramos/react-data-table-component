@@ -15,7 +15,7 @@ const TableCellCheckboxStyle = styled(CellBase)`
 
 const TableCellCheckbox = ({ name, row, selected }) => {
   const { dispatch, data, keyField, selectableRowsComponent, selectableRowsComponentProps, selectableRowDisabled } = useTableContext();
-  const disabled = row.selectableDisabled || selectableRowDisabled && selectableRowDisabled(row);
+  const disabled = row.selectableDisabled || (selectableRowDisabled && selectableRowDisabled(row));
   // eslint-disable-next-line react-hooks/exhaustive-deps
   const handleOnRowSelected = useCallback(() => dispatch({ type: 'SELECT_SINGLE_ROW', row, rows: data, isRowSelected: selected, keyField }), [data, selected, row]);
 

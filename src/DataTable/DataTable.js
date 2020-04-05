@@ -200,21 +200,19 @@ const DataTable = memo(({
   }, [currentPage, pagination, paginationServer, rowsPerPage, sortedData]);
 
   const footerRow = useMemo(() => {
-    let output = {
-      selectableDisabled: true
+    const output = {
+      selectableDisabled: true,
     };
-    let footerColumns = columns
+    const footerColumns = columns
       .filter(c => ['sum'].indexOf(c.footer) >= 0);
     footerColumns.forEach(c => {
-        output[c.selector] = 0;
-      });
+      output[c.selector] = 0;
+    });
     calculatedRows.forEach(r => {
       footerColumns.forEach(c => {
-        let field = c.selector;
-        let value = Number(r[field]);
-        if (!isNaN(value)) {
-          output[field] += value;
-        }
+        const field = c.selector;
+        const value = Number.isNaN(r[field]) ? 0 : Number(r[field]);
+        output[field] += value;
       });
     });
     return output;
@@ -406,9 +404,9 @@ const DataTable = memo(({
                   })}
                   {!progressPending && showFooter && calculatedRows.length > 0 && (
                     <FooterRow
-                      className={'rdt_TableFootRow'}
-                      id={'footer'}
-                      key={'footer'}
+                      className="rdt_TableFootRow"
+                      id="footer"
+                      key="footer"
                       keyField={keyField}
                       row={footerRow}
                       columns={columnsMemo}
@@ -423,7 +421,7 @@ const DataTable = memo(({
                       expandableRowsComponent={expandableRowsComponentMemo}
                       expandableRowsHideExpander={expandableRowsHideExpander}
                       onRowExpandToggled={onRowExpandToggled}
-                      defaultExpanderDisabled={true}
+                      defaultExpanderDisabled
                       defaultExpanded={false}
                       inheritConditionalStyles={expandableInheritConditionalStyles}
                       onRowClicked={noop}

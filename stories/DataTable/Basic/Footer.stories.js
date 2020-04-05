@@ -82,8 +82,6 @@ const columns = [
   },
 ];
 
-const rowDisabledCriteria = row => row.isFooter;
-
 const BasicFooterTable = () => {
   const [filterText, setFilterText] = React.useState('');
   const [resetPaginationToggle, setResetPaginationToggle] = React.useState(false);
@@ -105,7 +103,7 @@ const BasicFooterTable = () => {
       title="Movie List"
       columns={columns}
       data={filteredItems}
-      showFooter={true}
+      showFooter
       pagination
       paginationResetDefaultPage={resetPaginationToggle} // optionally, a hook to reset pagination to page 1
       subHeader
